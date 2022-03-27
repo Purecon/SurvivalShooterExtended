@@ -14,6 +14,8 @@ public class EnemyAttack : MonoBehaviour
     bool playerInRange;
     float timer;
 
+    //Range attack
+    public bool isRanged = false;
 
     void Awake ()
     {
