@@ -2682,5 +2682,17 @@ PrefabInstance:
       propertyPath: healthSlider
       value: 
       objectReference: {fileID: 489342036}
+    - target: {fileID: 6588625275212262116, guid: 943162f8c474f45488e61464c670b010, type: 3}
+      propertyPath: m_Drag
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588625275212262116, guid: 943162f8c474f45488e61464c670b010, type: 3}
+      propertyPath: m_AngularDrag
+      value: Infinity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6588625275212262116, guid: 943162f8c474f45488e61464c670b010, type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 943162f8c474f45488e61464c670b010, type: 3}
