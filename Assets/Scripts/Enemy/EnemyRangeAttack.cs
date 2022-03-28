@@ -42,6 +42,14 @@ public class EnemyRangeAttack : EnemyAttack
     protected override void FixedUpdate()
     {
         rangeAttacktimer += Time.deltaTime;
+        if (playerInRange)
+        {
+            anim.SetTrigger("PlayerInRange");
+        }
+        else
+        {
+            anim.ResetTrigger("PlayerInRange");
+        }
         base.FixedUpdate();
     }
 }
