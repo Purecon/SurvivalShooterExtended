@@ -6,18 +6,14 @@ public class EnemyAttack : MonoBehaviour
     public float timeBetweenAttacks = 0.5f;
     public int attackDamage = 10;
 
+    protected Animator anim;
+    protected GameObject player;
+    protected PlayerHealth playerHealth;
+    protected EnemyHealth enemyHealth;
+    protected bool playerInRange;
+    protected float timer;
 
-    Animator anim;
-    GameObject player;
-    PlayerHealth playerHealth;
-    EnemyHealth enemyHealth;
-    bool playerInRange;
-    float timer;
-
-    //Range attack
-    public bool isRanged = false;
-
-    void Awake ()
+    protected void Awake ()
     {
         player = GameObject.FindGameObjectWithTag ("Player");
         playerHealth = player.GetComponent <PlayerHealth> ();
@@ -25,7 +21,7 @@ public class EnemyAttack : MonoBehaviour
         anim = GetComponent <Animator> ();
     }
 
-    void OnTriggerEnter (Collider other)
+    protected void OnTriggerEnter (Collider other)
     {
         if(other.gameObject == player && other.isTrigger == false)
         {
@@ -33,7 +29,7 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    void OnTriggerExit (Collider other)
+    protected void OnTriggerExit (Collider other)
     {
         if(other.gameObject == player)
         {
@@ -42,7 +38,7 @@ public class EnemyAttack : MonoBehaviour
     }
 
 
-    void Update ()
+    virtual protected void FixedUpdate ()
     {
         timer += Time.deltaTime;
 
@@ -57,14 +53,14 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-
-    void Attack ()
+    virtual protected void Attack ()
     {
         timer = 0f;
-
+        
+        //Melee attack
         if (playerHealth.currentHealth > 0)
         {
-            playerHealth.TakeDamage (attackDamage);
+            playerHealth.TakeDamage(attackDamage);
         }
     }
 }
