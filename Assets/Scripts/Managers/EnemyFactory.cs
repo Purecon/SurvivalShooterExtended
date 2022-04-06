@@ -14,4 +14,9 @@ public class EnemyFactory : MonoBehaviour,IFactory
         GameObject enemy = enemyPrefab[tag];
         return enemy;
     }
+
+    public GameObject[] getArray()
+    {
+        return enemyPrefab;
+    }
 }

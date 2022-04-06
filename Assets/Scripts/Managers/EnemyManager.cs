@@ -10,6 +10,8 @@ public class EnemyManager : MonoBehaviour
     MonoBehaviour factory;
     IFactory Factory { get { return factory as IFactory; } }
 
+    public int enemyTypeNumber = 3;
+
     void Start ()
     {
         InvokeRepeating("Spawn", spawnTime, spawnTime);
@@ -23,8 +25,8 @@ public class EnemyManager : MonoBehaviour
             return;
         }
 
-        int spawnPointIndex = Random.Range (0, spawnPoints.Length);
-        int spawnEnemy = Random.Range(0, 3);
+        int spawnPointIndex = Random.Range (0, spawnPoints.Length-1);
+        int spawnEnemy = Random.Range(0, enemyTypeNumber-1);
 
         //Random enemy type
         Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
