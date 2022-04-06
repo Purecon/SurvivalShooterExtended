@@ -1,10 +1,15 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerShooting : MonoBehaviour
 {
     public int damagePerShot = 20;
     public float timeBetweenBullets = 0.15f;
+    public float speedMultiplier = 1.1f;
     public float range = 100f;
+    public int diagonalUpgrade = 1;
+    public float maxAngle = 45f;
+    public GameObject weaponLineRenderer;
 
 
     float timer;
@@ -14,9 +19,11 @@ public class PlayerShooting : MonoBehaviour
     ParticleSystem gunParticles;
     LineRenderer gunLine;
     AudioSource gunAudio;
+    List<GameObject> lineRenderers;
     public Light gunLight;
     public Light pointLight;
     float effectsDisplayTime = 0.2f;
+    float shootAngle;
 
 
     void Awake()
@@ -30,6 +37,20 @@ public class PlayerShooting : MonoBehaviour
         gunAudio = GetComponent<AudioSource>();
         //pointLight = GetComponent<Light>();
         //gunLight = GetComponentInChildren<Light>();
+        shootAngle = maxAngle;
+
+		lineRenderers = new List<GameObject>
+		{
+			Instantiate(weaponLineRenderer, transform.position, Quaternion.identity)
+		};
+
+        //upgradeDiagonal();
+        //upgradeSpeed();
+        //upgradeSpeed();
+        //upgradeSpeed();
+        //upgradeDiagonal();
+        //upgradeDiagonal();
+        //upgradeDiagonal();
     }
 
 
@@ -54,7 +75,10 @@ public class PlayerShooting : MonoBehaviour
     {
         //disable line renderer
         gunLine.enabled = false;
-
+        foreach (GameObject lr in lineRenderers)
+        {
+            lr.GetComponent<LineRenderer>().enabled = false;
+        }
         //disable light
         gunLight.enabled = false;
 
@@ -75,36 +99,74 @@ public class PlayerShooting : MonoBehaviour
 
         //Play gun particle
         gunParticles.Stop();
-        gunParticles.Play();
+		gunParticles.Play();
 
         //enable Line renderer dan set first position
-        gunLine.enabled = true;
-        gunLine.SetPosition(0, transform.position);
+        //gunLine.enabled = true;
+        //gunLine.SetPosition(0, transform.position);
 
-        //Set posisi ray shoot dan direction
-        shootRay.origin = transform.position;
-        shootRay.direction = transform.forward;
-        Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red);
+        int count = 0;
+        int positiveAngle = 1;
+        foreach (GameObject lr in lineRenderers) { 
+            
 
-        //Lakukan raycast jika mendeteksi id nemy hit apapun
-        if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
-        {
-            //Lakukan raycast hit hace component Enemyhealth
-            EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+            lr.GetComponent<LineRenderer>().enabled = true;
+            lr.GetComponent<LineRenderer>().SetPosition(0, transform.position);
 
-            if (enemyHealth != null)
+
+
+            //Set posisi ray shoot dan direction
+            shootRay.origin = transform.position;
+            shootRay.direction = Quaternion.AngleAxis((count*positiveAngle*shootAngle), transform.up) * transform.forward;
+            if (count == 0 || positiveAngle == -1)
             {
-                //Lakukan Take Damage
-                enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                count += 1;
+                positiveAngle = 1;
+            }
+            else
+            {
+                positiveAngle = -1;
             }
 
-            //Set line end position ke hit position
-            gunLine.SetPosition(1, shootHit.point);
-        }
-        else
-        {
-            //set line end position ke range freom barrel
-            gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+            Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red);
+
+            //Lakukan raycast jika mendeteksi id nemy hit apapun
+            if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
+            {
+                //Lakukan raycast hit hace component Enemyhealth
+                EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+
+                if (enemyHealth != null)
+                {
+                    //Lakukan Take Damage
+                    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                }
+
+                //Set line end position ke hit position
+                //gunLine.SetPosition(1, shootHit.point);
+                lr.GetComponent<LineRenderer>().SetPosition(1, shootHit.point);
+            }
+            else
+            {
+                //set line end position ke range freom barrel
+                //gunLine.SetPosition(1, shootRay.origin + shootRay.direction * range);
+                lr.GetComponent<LineRenderer>().SetPosition(1, shootRay.origin + shootRay.direction * range);
+            }
+
         }
     }
+
+    public void upgradeSpeed()
+    {
+        timeBetweenBullets = timeBetweenBullets / speedMultiplier;
+    }
+
+    public void upgradeDiagonal()
+    {
+        lineRenderers.Add(Instantiate(weaponLineRenderer, transform.position, Quaternion.identity));
+        lineRenderers.Add(Instantiate(weaponLineRenderer, transform.position, Quaternion.identity));
+        diagonalUpgrade += 1;
+        shootAngle = maxAngle / diagonalUpgrade;
+    }
+
 }
