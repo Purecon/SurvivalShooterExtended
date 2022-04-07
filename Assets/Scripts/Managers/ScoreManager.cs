@@ -26,9 +26,9 @@ public class ScoreManager : MonoBehaviour
     void Awake ()
     {
         var json = PlayerPrefs.GetString("scores","{}");
-        scores = JsonUtility.FromJson<List<Score>>(json);
-        var json2 = PlayerPrefs.GetString("scores2", "{}");
-        scores2 = JsonUtility.FromJson<List<Score>>(json2);
+        ScoreData scoreData = JsonUtility.FromJson<ScoreData>(json);
+        scores = scoreData.scores;
+        scores2 = scoreData.scores2;
 
         // If there is an instance, and it's not me, delete myself.
         if (Instance != null && Instance != this)
@@ -102,9 +102,8 @@ public class ScoreManager : MonoBehaviour
     public void SaveScore()
     {
         Debug.Log("Saving..");
-        var json = JsonUtility.ToJson(scores);
+        var json = JsonUtility.ToJson(new ScoreData(scores,scores2));
+        Debug.Log(json);
         PlayerPrefs.SetString("scores",json);
-        var json2 = JsonUtility.ToJson(scores2);
-        PlayerPrefs.SetString("scores2", json2);
     }
 }

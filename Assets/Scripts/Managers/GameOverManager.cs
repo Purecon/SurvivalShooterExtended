@@ -29,20 +29,20 @@ public class GameOverManager : MonoBehaviour
 
             if (restartTimer >= restartDelay)
             {
+                //Save score
+                ScoreManager scoreManager = ScoreManager.Instance;
+                if (scoreManager.isZenMode)
+                {
+                    scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.stopWatch.currentTime));
+                }
+                else
+                {
+                    scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score), false);
+                }
+                scoreManager.SaveScore();
+
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
-
-            //Save score
-            ScoreManager scoreManager = ScoreManager.Instance;
-            if (scoreManager.isZenMode)
-            {
-                scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.stopWatch.currentTime));
-            }
-            else
-            {
-                scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score),false);
-            }
-            scoreManager.SaveScore();
         }
     }
 
