@@ -12,6 +12,8 @@ public class ScoreManager : MonoBehaviour
 
     public StopWatch stopWatch;
 
+    public static String playerName = "defaultName";
+
     void Awake ()
     {
         stopWatch = GetComponent<StopWatch>();
