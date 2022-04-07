@@ -6,7 +6,7 @@ using System;
 
 public class StopWatch : MonoBehaviour
 {
-    bool stopwatchActive = false;
+    public bool stopwatchActive = false;
     public float currentTime;
     //public Text currentTimeText;
 
