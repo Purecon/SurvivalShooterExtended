@@ -6,14 +6,14 @@ using System;
 
 public class StopWatch : MonoBehaviour
 {
-    bool stopwatchActive = true;
-    float currentTime;
-    public Text currentTimeText;
+    bool stopwatchActive = false;
+    public float currentTime;
+    //public Text currentTimeText;
 
     // Start is called before the first frame update
     void Start()
     {
-        currentTimeText = GetComponent<Text>();
+        //currentTimeText = GetComponent<Text>();
         currentTime = 0;
     }
 
@@ -25,7 +25,7 @@ public class StopWatch : MonoBehaviour
             currentTime = currentTime + Time.deltaTime;
         }
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
-        currentTimeText.text = time.ToString(@"mm\:ss\:fff");
+        //currentTimeText.text = time.ToString(@"mm\:ss\:fff");
     }
 
     public void StartStopWatch()

@@ -1,25 +1,48 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class ScoreManager : MonoBehaviour
 {
     public static int score;
 
-
     Text text;
+    public bool isZenMode = false; 
 
+    public StopWatch stopWatch;
 
     void Awake ()
     {
-        text = GetComponent <Text> ();
+        stopWatch = GetComponent<StopWatch>();
+        if (isZenMode && stopWatch)
+        {
+            stopWatch.StartStopWatch();
+        }
+        text = GetComponent<Text>();
         score = 0;
     }
 
 
     void Update ()
     {
-        text.text = "Score: " + score;
+        if (!isZenMode)
+        {
+            text.text = "Score: " + score.ToString();
+        }
+        else
+        {
+            TimeSpan time = TimeSpan.FromSeconds(stopWatch.currentTime);
+            if (stopWatch.currentTime < 60)
+            {
+                text.text = "Time: " + time.ToString(@"ss\:ff");
+            }
+            else
+            {
+                text.text = "Time: " + time.ToString(@"mm\:ss\:ff");
+            }
+            //Debug.Log(time.ToString(@"mm\:ss\:ff"));
+        }
         //Debug.Log("Score: " + score);
     }
 }
