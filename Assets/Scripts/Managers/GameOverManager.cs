@@ -25,12 +25,15 @@ public class GameOverManager : MonoBehaviour
         {
             anim.SetTrigger("GameOver");
 
+            //Stoptime
+            ScoreManager scoreManager = ScoreManager.Instance;
+            scoreManager.StopTime();
+
             restartTimer += Time.deltaTime;
 
             if (restartTimer >= restartDelay)
             {
                 //Save score
-                ScoreManager scoreManager = ScoreManager.Instance;
                 if (scoreManager.isZenMode)
                 {
                     scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.stopWatch.currentTime));

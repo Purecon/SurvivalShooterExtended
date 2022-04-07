@@ -106,4 +106,9 @@ public class ScoreManager : MonoBehaviour
         Debug.Log(json);
         PlayerPrefs.SetString("scores",json);
     }
+
+    public void StopTime()
+    {
+        stopWatch.StopStopWatch();
+    }
 }
