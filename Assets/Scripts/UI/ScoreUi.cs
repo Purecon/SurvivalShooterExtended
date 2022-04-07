@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using System;
 
 public class ScoreUi : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class ScoreUi : MonoBehaviour
     void Start()
     {
         scoreManager = ScoreManager.Instance;
+        
         /*
         scoreManager.AddScore(new Score(ScoreManager.playerName,6));
         scoreManager.AddScore(new Score(ScoreManager.playerName,66));
@@ -31,17 +33,26 @@ public class ScoreUi : MonoBehaviour
         if (isZen)
         {
             var scores = scoreManager.GetHighScores(isZen).ToArray();
+            if(scores.Length < amountShown)
+            {
+                amountShown = scores.Length;
+            }
             for (int i = 0; i < amountShown; i++)
             {
                 var row = Instantiate(rowUi, transform).GetComponent<RowUi>();
                 row.rankText.text = (i + 1).ToString();
                 row.nameText.text = scores[i].name;
-                row.scoreText.text = scores[i].score.ToString();
+                TimeSpan time = TimeSpan.FromSeconds(scores[i].score);
+                row.scoreText.text = time.ToString(@"mm\:ss\:ff");
             }
         }
-        if(!isZen)
+        else
         {
             var scores = scoreManager.GetHighScores(isZen).ToArray();
+            if (scores.Length < amountShown)
+            {
+                amountShown = scores.Length;
+            }
             for (int i = 0; i < amountShown; i++)
             {
                 var row = Instantiate(rowUi, transform).GetComponent<RowUi>();

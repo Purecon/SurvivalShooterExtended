@@ -17,7 +17,7 @@ public class ScoreManager : MonoBehaviour
     public bool isZenMode = false;
     public bool isMainMenuMode = false;
 
-    public StopWatch stopWatch;
+    public static StopWatch stopWatch;
 
     public static String playerName = "default";
     //Singleton
@@ -101,9 +101,10 @@ public class ScoreManager : MonoBehaviour
 
     public void SaveScore()
     {
+        Debug.Log("Saving..");
         var json = JsonUtility.ToJson(scores);
         PlayerPrefs.SetString("scores",json);
         var json2 = JsonUtility.ToJson(scores2);
-        PlayerPrefs.SetString("scores2", json);
+        PlayerPrefs.SetString("scores2", json2);
     }
 }
