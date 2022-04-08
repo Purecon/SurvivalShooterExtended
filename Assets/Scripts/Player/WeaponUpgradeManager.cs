@@ -35,13 +35,9 @@ public class WeaponUpgradeManager : MonoBehaviour
             }
 
         }
-        else
-        {
-
-        }
     }
 
-    void enableOption()
+    public void enableOption()
     {
         Time.timeScale = 0;
         upgradePanel.SetActive(true);

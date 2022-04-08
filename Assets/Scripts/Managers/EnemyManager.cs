@@ -5,6 +5,8 @@ public class EnemyManager : MonoBehaviour
     public PlayerHealth playerHealth;
     public float spawnTime = 3f;
     public Transform[] spawnPoints;
+    public bool isZenMode = true;
+    public GameObject bossPrefab;
 
     [SerializeField]
     MonoBehaviour factory;
@@ -14,7 +16,10 @@ public class EnemyManager : MonoBehaviour
 
     void Start ()
     {
-        InvokeRepeating("Spawn", spawnTime, spawnTime);
+        if (isZenMode)
+        {
+            InvokeRepeating("Spawn", spawnTime, spawnTime);
+        }
     }
 
 
@@ -30,5 +35,31 @@ public class EnemyManager : MonoBehaviour
 
         //Random enemy type
         Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+    }
+
+    public int spawnWave(int weight)
+    {
+        if (playerHealth.currentHealth <= 0f)
+        {
+            return -1;
+        }
+
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        int spawnEnemy = Random.Range(0, enemyTypeNumber);
+        while (Factory.getWeight(spawnEnemy) > weight)
+        {
+            spawnEnemy = Random.Range(0, enemyTypeNumber);
+        }
+        
+
+        Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
+
+        return Factory.getWeight(spawnEnemy);
+    }
+
+    public void spawnBoss()
+    {
+        int spawnPointIndex = Random.Range(0, spawnPoints.Length);
+        Instantiate(bossPrefab, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
 }

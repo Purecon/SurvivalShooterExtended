@@ -6,6 +6,7 @@ public class EnemyFactory : MonoBehaviour,IFactory
 {
     [SerializeField]
     public GameObject[] enemyPrefab;
+    public int[] enemyWeight;
 
     public GameObject FactoryMethod(int tag)
     {
@@ -18,5 +19,10 @@ public class EnemyFactory : MonoBehaviour,IFactory
     public GameObject[] getArray()
     {
         return enemyPrefab;
+    }
+
+    public int getWeight(int i)
+    {
+        return enemyWeight[i];
     }
 }
