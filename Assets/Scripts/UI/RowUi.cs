@@ -7,5 +7,6 @@ public class RowUi : MonoBehaviour
 {
     public Text rankText;
     public Text nameText;
+    public Text waveText;
     public Text scoreText;
 }

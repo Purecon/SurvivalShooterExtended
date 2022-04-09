@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WaveManager : MonoBehaviour
 {
-    public int currentWave;
+    public static int currentWave;
     public int maxWave;
     public int weight;
     public float weightMultiplier = 1.5f;

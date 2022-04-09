@@ -40,7 +40,7 @@ public class GameOverManager : MonoBehaviour
                 }
                 else
                 {
-                    scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score), false);
+                    scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score, WaveManager.currentWave), false);
                 }
                 scoreManager.SaveScore();
 

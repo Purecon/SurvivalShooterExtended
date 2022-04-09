@@ -61,6 +61,10 @@ public class EnemyCircleAttack : EnemyAttack
         {
             anim.ResetTrigger("PlayerInRange");
         }
+        if (enemyHealth.currentHealth <= 0)
+        {
+            Destroy(bullet, 2f);
+        }
         base.FixedUpdate();
     }
 }
