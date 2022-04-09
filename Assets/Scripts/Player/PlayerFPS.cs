@@ -8,7 +8,6 @@ public class PlayerFPS : MonoBehaviour
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
-    float camRayLength = 100f;
 
     //FPS
     public Camera playerCamera;

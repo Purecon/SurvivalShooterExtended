@@ -581,8 +581,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86e378bc199fbd343bceabbd3a16d73e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scores: []
+  scores2: []
   isZenMode: 1
-  stopWatch: {fileID: 0}
+  isMainMenuMode: 0
 --- !u!114 &414891671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bb9cdacdcc4a594f935cc03b94e83d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stopwatchActive: 0
   currentTime: 0
 --- !u!1 &489342034
 GameObject:
@@ -1102,6 +1105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab:
   - {fileID: 1675299126622794678, guid: bd594f95815e18c4184908ff36f4babc, type: 3}
+  enemyWeight: 
 --- !u!4 &1004736643
 Transform:
   m_ObjectHideFlags: 0
@@ -1325,6 +1329,8 @@ MonoBehaviour:
   spawnTime: 5
   spawnPoints:
   - {fileID: 972395244}
+  isZenMode: 1
+  bossPrefab: {fileID: 0}
   factory: {fileID: 1434918995}
   enemyTypeNumber: 5
 --- !u!114 &1143143384
@@ -1343,6 +1349,8 @@ MonoBehaviour:
   spawnTime: 5
   spawnPoints:
   - {fileID: 1019099558}
+  isZenMode: 1
+  bossPrefab: {fileID: 0}
   factory: {fileID: 1434918995}
   enemyTypeNumber: 5
 --- !u!114 &1143143385
@@ -1361,6 +1369,8 @@ MonoBehaviour:
   spawnTime: 5
   spawnPoints:
   - {fileID: 1590744341}
+  isZenMode: 1
+  bossPrefab: {fileID: 0}
   factory: {fileID: 1434918995}
   enemyTypeNumber: 5
 --- !u!4 &1143143386
@@ -1396,6 +1406,8 @@ MonoBehaviour:
   - {fileID: 2036596045}
   - {fileID: 923426892}
   - {fileID: 1444406356}
+  isZenMode: 1
+  bossPrefab: {fileID: 0}
   factory: {fileID: 1004736642}
   enemyTypeNumber: 1
 --- !u!1 &1196966671
@@ -1739,6 +1751,7 @@ MonoBehaviour:
   - {fileID: 426557599681583845, guid: 3e7dd472c8e8d814dabb5f005f184c43, type: 3}
   - {fileID: 4096415422150449590, guid: 37e702006382c24489667fdcd041f737, type: 3}
   - {fileID: 4917274987732659048, guid: de484d991b115a341a1c52202d57dad5, type: 3}
+  enemyWeight: 
 --- !u!4 &1434918996
 Transform:
   m_ObjectHideFlags: 0
