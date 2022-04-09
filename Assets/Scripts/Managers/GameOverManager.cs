@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameOverManager : MonoBehaviour
 {
@@ -37,12 +38,13 @@ public class GameOverManager : MonoBehaviour
             if (scoreManager.isZenMode)
             {
                 scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.stopWatch.currentTime));
-                gameOverPanel.transform.Find("Score").GetComponent<Text>().text = "Time: " + ScoreManager.stopWatch.currentTime.ToString();
+                TimeSpan time = TimeSpan.FromSeconds(ScoreManager.stopWatch.currentTime);
+                gameOverPanel.transform.Find("Score").GetComponent<Text>().text = "Time: " + time.ToString(@"mm\:ss\:ff");
             }
             else
             {
                 scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score, WaveManager.currentWave), false);
-                gameOverPanel.transform.Find("Score").GetComponent<Text>().text = "Score: " +ScoreManager.score.ToString();
+                gameOverPanel.transform.Find("Score").GetComponent<Text>().text = "Score: " +ScoreManager.score.ToString() + "\n" + "Wave: " + WaveManager.currentWave.ToString();
             }
             scoreManager.SaveScore();
             //gameOverPanel.SetActive(true);

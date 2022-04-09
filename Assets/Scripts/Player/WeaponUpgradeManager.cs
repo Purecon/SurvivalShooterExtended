@@ -41,6 +41,10 @@ public class WeaponUpgradeManager : MonoBehaviour
     {
         Time.timeScale = 0;
         upgradePanel.SetActive(true);
+
+        // Unlock cursor
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     void disableOption()

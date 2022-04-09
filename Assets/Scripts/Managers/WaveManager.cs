@@ -78,6 +78,7 @@ public class WaveManager : MonoBehaviour
         {
             ScoreManager scoreManager = ScoreManager.Instance;
             scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score,currentWave), false);
+            scoreManager.SaveScore();
             winPanel.SetActive(true);
         }
     }
