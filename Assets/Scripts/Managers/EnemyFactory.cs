@@ -25,4 +25,17 @@ public class EnemyFactory : MonoBehaviour,IFactory
     {
         return enemyWeight[i];
     }
+
+    public int getMinWeight()
+    {
+        int min = 999;
+        foreach (int w in enemyWeight)
+        {
+            if (w < min)
+            {
+                min = w;
+            }
+        }
+        return min;
+    }
 }

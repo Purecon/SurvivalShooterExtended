@@ -6,4 +6,5 @@ public interface IFactory
 {
     GameObject FactoryMethod(int tag);
     int getWeight(int i);
+    int getMinWeight();
 }

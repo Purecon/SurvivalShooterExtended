@@ -7,6 +7,7 @@ public class EnemyManager : MonoBehaviour
     public Transform[] spawnPoints;
     public bool isZenMode = true;
     public GameObject bossPrefab;
+    public bool isStaticManager = false;
 
     [SerializeField]
     MonoBehaviour factory;
@@ -37,15 +38,15 @@ public class EnemyManager : MonoBehaviour
         Instantiate(Factory.FactoryMethod(spawnEnemy), spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
 
-    public int spawnWave(int weight)
+    public int spawnWave(int weight, int maxId)
     {
-        if (playerHealth.currentHealth <= 0f)
+        if (playerHealth.currentHealth <= 0f || Factory.getMinWeight() > weight)
         {
             return -1;
         }
 
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
-        int spawnEnemy = Random.Range(0, enemyTypeNumber);
+        int spawnEnemy = Random.Range(0, maxId+1);
         while (Factory.getWeight(spawnEnemy) > weight)
         {
             spawnEnemy = Random.Range(0, enemyTypeNumber);

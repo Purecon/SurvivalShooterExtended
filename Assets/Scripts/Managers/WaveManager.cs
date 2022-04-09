@@ -10,15 +10,18 @@ public class WaveManager : MonoBehaviour
     public float weightMultiplier = 1.5f;
     public GameObject enemyManager;
     public GameObject weaponUpgradeManager;
+    public GameObject winPanel;
     public float spawnTime;
     public int spawnPerTime;
     public static int enemyCount = 0;
+    public int maxEnemyID = 2;
+    public int maxStaticEnemyID = -1;
 
     EnemyManager[] enemyManagers;
     int tempWeight;
     float timer;
-    bool isFightingBoss;
-    
+    int w = -1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class WaveManager : MonoBehaviour
         timer = 0f;
         tempWeight = weight;
         enemyManagers = enemyManager.GetComponents<EnemyManager>();
+
     }
 
     // Update is called once per frame
@@ -38,9 +42,23 @@ public class WaveManager : MonoBehaviour
             int count = 0;
             while (count < spawnPerTime && tempWeight > 0)
             {
+                w = -1;
                 int emId = Random.Range(0, enemyManagers.Length);
-                tempWeight -= enemyManagers[emId].spawnWave(tempWeight);
-                enemyCount++;
+                if (enemyManagers[emId].isStaticManager && maxStaticEnemyID >= 0)
+                {
+                    w = enemyManagers[emId].spawnWave(tempWeight, maxStaticEnemyID);
+                }
+                else if (!enemyManagers[emId].isStaticManager)
+                {
+                    w = enemyManagers[emId].spawnWave(tempWeight, maxEnemyID);
+                }
+                
+                if (w != -1)
+                {
+                    tempWeight -= w;
+                    enemyCount++;
+                    count++;
+                }
             }
             timer = 0f;
         }
@@ -49,7 +67,16 @@ public class WaveManager : MonoBehaviour
         {
             currentWave++;
             timer = 0f;
+            if (currentWave > maxWave)
+            {
+                //menang, jangan lupa tambah skor
+            }
             nextWave();
+        }
+
+        if (tempWeight == 0 && enemyCount == 0 && currentWave == maxWave)
+        {
+            winPanel.SetActive(true);
         }
     }
 
@@ -60,7 +87,25 @@ public class WaveManager : MonoBehaviour
         tempWeight = weight;
 
         //update spawtime and spawnpertime??
-        
+
+        //tambah skeleton enemy
+        if (currentWave == 4)
+        {
+            maxStaticEnemyID++;
+        }
+
+        //tambah bomber enemy
+        if (currentWave == 7)
+        {
+            maxEnemyID++;
+        }
+
+        //tambah skeleton band enemy
+        if (currentWave == 10)
+        {
+            maxStaticEnemyID++;
+        }
+
         if (currentWave % 3 == 0)
         {
             spawnBoss();
