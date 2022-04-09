@@ -76,6 +76,8 @@ public class WaveManager : MonoBehaviour
 
         if (tempWeight == 0 && enemyCount == 0 && currentWave == maxWave)
         {
+            ScoreManager scoreManager = ScoreManager.Instance;
+            scoreManager.AddScore(new Score(ScoreManager.playerName, ScoreManager.score,currentWave), false);
             winPanel.SetActive(true);
         }
     }

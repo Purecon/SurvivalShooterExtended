@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/WaveMode.unity
     guid: 0bc0f760eaad82e4d95f7863cfdf1109
   - enabled: 1
-    path: Assets/Scenes/FPSMode.unity
+    path: Assets/Scenes/FPSMode_OLD.unity
     guid: 28833ac8a62ac9a4bbe5b8a780a2877b
   m_configObjects: {}
