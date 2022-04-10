@@ -8,13 +8,13 @@ public class PlayerFPS : MonoBehaviour
     Animator anim;
     Rigidbody playerRigidbody;
     int floorMask;
-    float camRayLength = 100f;
 
     //FPS
     public Camera playerCamera;
     public float lookSpeed = 2.0f;
     public float lookXLimit = 45.0f;
     float rotationX = 0;
+    public PlayerHealth playerHealth;
 
     //Awake called before start
     private void Awake()
@@ -28,6 +28,7 @@ public class PlayerFPS : MonoBehaviour
 
         //Mendapat komponen Rigidbody
         playerRigidbody = GetComponent<Rigidbody>();
+        playerHealth = GetComponent<PlayerHealth>();
 
         // Lock cursor
         Cursor.lockState = CursorLockMode.Locked;
@@ -45,6 +46,20 @@ public class PlayerFPS : MonoBehaviour
         Move(h, v);
         Turning();
         Animating(h, v);
+
+        //Check death
+        if(playerHealth.currentHealth <= 0)
+        {
+            // Unlock cursor
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            // Lock cursor
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     //Method player berjalan

@@ -17,7 +17,9 @@ public class PlayerShooting : MonoBehaviour
     float timer;
     Ray shootRay = new Ray();
     RaycastHit shootHit;
+    RaycastHit shootFloor;
     int shootableMask;
+    int floorMask;
     ParticleSystem gunParticles;
     LineRenderer gunLine;
     AudioSource gunAudio;
@@ -26,13 +28,19 @@ public class PlayerShooting : MonoBehaviour
     public Light pointLight;
     float effectsDisplayTime = 0.2f;
     float shootAngle;
+<<<<<<< HEAD
     bool PowerBoost;
+=======
+    float floordist;
+    float enemydist;
+>>>>>>> b89b7eca5df322b541a873bc90c855c9643597a5
 
 
     void Awake()
     {
         //GetMask
         shootableMask = LayerMask.GetMask("Shootable");
+        floorMask = LayerMask.GetMask("Floor");
 
         //Mendapatkan Reference component
         gunParticles = GetComponent<ParticleSystem>();
@@ -142,21 +150,43 @@ public class PlayerShooting : MonoBehaviour
 
             Debug.DrawRay(shootRay.origin, shootRay.direction * range, Color.red);
 
+            //cek nabrak objek lain
+            floordist = -1f;
+            if (Physics.Raycast(shootRay, out shootFloor, range, floorMask))
+            {
+                //lr.GetComponent<LineRenderer>().SetPosition(1, shootFloor.point);
+                floordist = Vector3.Distance(transform.position, shootFloor.point);
+            }
             //Lakukan raycast jika mendeteksi id nemy hit apapun
             if (Physics.Raycast(shootRay, out shootHit, range, shootableMask))
             {
-                //Lakukan raycast hit hace component Enemyhealth
-                EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+                
+                enemydist = Vector3.Distance(transform.position, shootHit.point); ;
 
-                if (enemyHealth != null)
+                if (floordist == -1f || enemydist < floordist)
                 {
-                    //Lakukan Take Damage
-                    enemyHealth.TakeDamage(damagePerShot, shootHit.point);
-                }
 
-                //Set line end position ke hit position
-                //gunLine.SetPosition(1, shootHit.point);
-                lr.GetComponent<LineRenderer>().SetPosition(1, shootHit.point);
+                    //Lakukan raycast hit hace component Enemyhealth
+                    EnemyHealth enemyHealth = shootHit.collider.GetComponent<EnemyHealth>();
+
+                    if (enemyHealth != null)
+                    {
+                        //Lakukan Take Damage
+                        enemyHealth.TakeDamage(damagePerShot, shootHit.point);
+                    }
+
+                    //Set line end position ke hit position
+                    //gunLine.SetPosition(1, shootHit.point);
+                    lr.GetComponent<LineRenderer>().SetPosition(1, shootHit.point);
+                }
+                else
+                {
+                    lr.GetComponent<LineRenderer>().SetPosition(1, shootFloor.point);
+                }
+            }
+            else if (floordist != -1f)
+            {
+                lr.GetComponent<LineRenderer>().SetPosition(1, shootFloor.point);
             }
             else
             {

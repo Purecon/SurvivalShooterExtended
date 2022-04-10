@@ -10,7 +10,7 @@ public class EnemyAttack : MonoBehaviour
     protected GameObject player;
     protected PlayerHealth playerHealth;
     protected EnemyHealth enemyHealth;
-    protected bool playerInRange;
+    public bool playerInRange;
     protected float timer;
 
     protected void Awake ()
