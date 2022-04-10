@@ -6,8 +6,8 @@ Survival Shooter Extended Edition
 ## Deskripsi Aplikasi
 Aplikasi ini adalah pengembangan survival shooter game dari Unity Learn dengan penambahan fitur Atribut Player, Orbs, tambahan Mobs, Game Mode Zen, Wave, dan First Person, Weapon Upgrade, Local Scoreboard, Main Menu, dan Game Over.
 ## Cara Kerja
- - Attribute Player: 
- - Orbs: 
+ - Attribute Player: Player memiliki atribut awal sebesar 100 HP, 20 Damage, 6 Speed. Attribut maksimal dari player adalah 200 HP, 40 Damage dan 10 Speed. 
+ - Orbs: Masing-masing Orbs memiliki spawn point yang pasti dan muncul dalam periode waktu tertentu, Orb HP akan menambahkan 5 HP, Orb Damage akan menambahkan 2 Damage dan Orb Speed akan menambahkan 0.5 Speed kepada player. Akan dicek jika orb menambahkan stats ke player melebihi batas maksimum, maka stats tersebut akan dikurangi kembali sehingga seperti tidak terjadi perubahan
  - Additional Mobs : Additional Mobs dibuat dengan membuat prefab mob baru yang kemudian ditambahkan ke dalam enemyFactory.
  - Zen Mode : Dibuat dengan menambahkan timer pada game.
  - Wave Mode : Dibuat sesuai spesifikasi, untuk setiap wave aplikasi akan mengecek apakah semua enemy sudah mati kemudian memulai wave berikutnya. untuk enemy pool pada 3 wave pertama menggunakan mobs bawaan dari survival shooter, 3 wave berikutnya ditambah dengan mob skeleton, 3 wave berikutnya ditambah dengan bomber, dan untuk seluruh wave setelahnya menggunakan semua mobs yang ada. Jika sudah mencapai maksimum wave akan ditampilkan pesan bahwa player menang.
