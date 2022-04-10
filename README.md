@@ -15,8 +15,8 @@ Aplikasi ini adalah pengembangan survival shooter game dari Unity Learn dengan p
  - Local Scoreboard: Pada akhir setiap permainan score akan disimpan dan 4 skor tertinggi untuk setiap mode dapat dilihat pada menu scoreboard.
  - Main Menu : Main menu dibuat dengan 4 menu yaitu play, settings, leaderboard, dan quit. pada menu play dapat memilih mode permainan kemudian memulai permainan. Pada menu settings dapat mengganti nama player, pada menu leaderboard akan menampilkan leaderboard mode wave dan zen, dan quit untuk keluar dari game.
  - Game Over: tampilan game over akan muncul ketika player mati dan akan menampilkan skor atau waktu akhir dan memiliki tombol untuk memulai game dengan mode yang sama atau kembali ke main menu.
- - First Person Mode:
- - Object Pooling
+ - First Person Mode: Mode dimana player memiliki tampilan first person dengan sudut kamera dengan perspektif dari kepala player
+ - Object Pooling: Menggunakan object pooling untuk bullet dari range attack sehingga benda di-instantiate di awal sehingga mampu memperkecil 
 
 
 ## Screenshot
