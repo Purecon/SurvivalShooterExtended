@@ -28,12 +28,10 @@ public class PlayerShooting : MonoBehaviour
     public Light pointLight;
     float effectsDisplayTime = 0.2f;
     float shootAngle;
-<<<<<<< HEAD
     bool PowerBoost;
-=======
+
     float floordist;
     float enemydist;
->>>>>>> b89b7eca5df322b541a873bc90c855c9643597a5
 
 
     void Awake()
