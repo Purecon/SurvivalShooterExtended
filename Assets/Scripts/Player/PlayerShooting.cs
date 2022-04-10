@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 
 public class PlayerShooting : MonoBehaviour
@@ -10,6 +11,7 @@ public class PlayerShooting : MonoBehaviour
     public int diagonalUpgrade = 1;
     public float maxAngle = 45f;
     public GameObject weaponLineRenderer;
+    public Text PowerUI;
 
 
     float timer;
@@ -24,6 +26,7 @@ public class PlayerShooting : MonoBehaviour
     public Light pointLight;
     float effectsDisplayTime = 0.2f;
     float shootAngle;
+    bool PowerBoost;
 
 
     void Awake()
@@ -70,6 +73,15 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
+    public void PowerUpgrade()
+    {
+        damagePerShot += 2;
+        if (damagePerShot > 40)
+        {
+            damagePerShot -= 2;
+        }
+        PowerUI.text = "Damage : " + damagePerShot.ToString();
+    }
 
     public void DisableEffects()
     {

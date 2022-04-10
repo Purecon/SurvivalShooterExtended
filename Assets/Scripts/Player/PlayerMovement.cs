@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody playerRigidbody;
     int floorMask;
     float camRayLength = 100f;
+    bool SpeedBoost;
+    public Text SpeedUI;
 
     //Awake called before start
     private void Awake()
@@ -73,6 +76,16 @@ public class PlayerMovement : MonoBehaviour
             //Rotasi player
             playerRigidbody.MoveRotation(newRotation);
         }
+    }
+
+    public void SpeedUpgrade()
+    {
+        speed += 0.5f;
+        if (speed > 10f)
+        {
+            speed -= 0.5f;
+        }
+        SpeedUI.text = "Speed : " + speed.ToString();
     }
 
     public void Animating(float h, float v)

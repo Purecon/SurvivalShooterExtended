@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip deathClip;
     public float flashSpeed = 5f;
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
+    public Text HPUI;
 
 
     Animator anim;
@@ -18,7 +19,8 @@ public class PlayerHealth : MonoBehaviour
     PlayerMovement playerMovement;
     PlayerShooting playerShooting;
     bool isDead;                                                
-    bool damaged;                                               
+    bool damaged;
+    bool HPBoost;
 
 
     void Awake()
@@ -47,6 +49,18 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
+    public void HealthUpgrade()
+    {
+        startingHealth += 5;
+        currentHealth += 5;
+        if (startingHealth > 200)
+        {
+            startingHealth -= 5;
+            currentHealth -= 5;
+        }
+        HPUI.text = currentHealth.ToString() + "/" + startingHealth.ToString();
+    }
+
     public void TakeDamage(int amount)
     {
         damaged = true;
@@ -54,6 +68,8 @@ public class PlayerHealth : MonoBehaviour
         currentHealth -= amount;
 
         healthSlider.value = currentHealth;
+
+        HPUI.text = currentHealth.ToString() + "/" + startingHealth.ToString();
 
         playerAudio.Play();
 
